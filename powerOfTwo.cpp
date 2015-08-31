@@ -7,3 +7,21 @@
 //
 
 #include <stdio.h>
+
+bool isPowerOfTwo(int n) {
+    int temp = n;
+    if (n == 0) {
+        return false;
+    }
+    if (n == 1) {
+        return true;
+    }
+    bool res = false;
+    while (temp % 2 == 0) {
+        temp = temp / 2;
+        if (temp == 1) {
+            res = true;
+        }
+    }
+    return res;
+}
