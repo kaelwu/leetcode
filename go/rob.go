@@ -32,3 +32,7 @@ func max(a, b int) int {
 		return b
 	}
 }
+
+func robTwo(nums []int) int {
+
+}
