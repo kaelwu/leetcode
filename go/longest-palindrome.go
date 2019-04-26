@@ -10,10 +10,10 @@ func longestPalindrome(s string) string {
 	if len(s) == 0 {
 		return s
 	}
-	new_str := insertWildcardtoStr(s)
+	newStr := insertWildcardtoStr(s)
 	// 设定p数据为每一个字符回文子串的半径.
-	p := make([]int, len(new_str))
-	var mx, po, max_len, position int
+	p := make([]int, len(newStr))
+	var mx, po, maxLen, position int
 	for i := 1; i <= 2*len(s)+1; i++ {
 		if mx > i {
 			p[i] = min(mx-i+1, p[2*po-i])
@@ -21,7 +21,7 @@ func longestPalindrome(s string) string {
 			p[i] = 1
 		}
 		for {
-			if i-p[i] >= 0 && i+p[i] < len(new_str) && new_str[i-p[i]] == new_str[i+p[i]] {
+			if i-p[i] >= 0 && i+p[i] < len(newStr) && newStr[i-p[i]] == newStr[i+p[i]] {
 				p[i]++
 			} else {
 				break
@@ -31,26 +31,24 @@ func longestPalindrome(s string) string {
 			po = i
 			mx = i + p[i]
 		}
-		tmp, res := max(max_len, p[i])
+		tmp, res := max(maxLen, p[i])
 		if !res {
-			max_len = tmp
+			maxLen = tmp
 			position = i
 		}
 	}
-	max_len--
-	fmt.Println(max_len, position)
-	start := position - max_len
+	maxLen--
+	start := position - maxLen
 	if start < 0 {
 		start = 0
 	}
-	end := position - 2 + max_len
+	end := position - 2 + maxLen
 	if end >= len(s) {
 		end = len(s)
 	}
-	fmt.Println(start, end)
-	str_one := new_str[start:end]
+	strOne := newStr[start:end]
 	result := make([]byte, 0)
-	for _, v := range str_one {
+	for _, v := range strOne {
 		if byte(v) == byte(35) {
 			continue
 		}
@@ -74,15 +72,13 @@ func insertWildcardtoStr(s string) string {
 func min(a, b int) int {
 	if a >= b {
 		return b
-	} else {
-		return a
 	}
+	return a
 }
 
 func max(a, b int) (int, bool) {
 	if a >= b {
 		return a, true
-	} else {
-		return b, false
 	}
+	return b, false
 }

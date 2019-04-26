@@ -1,11 +1,47 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
 	a := "1010"
 	b := "1"
 	fmt.Println(addBinary(a, b))
+	fmt.Println(addBinaryTwo(a, b))
+}
+
+func addBinaryTwo(a, b string) string {
+	var res string
+	m := len(a) - 1
+	n := len(b) - 1
+	carry := 0
+	var tmpOne, tmpTwo int
+	for {
+		if m < 0 && n < 0 {
+			if carry == 1 {
+				return "1" + res
+			}
+			return res
+		}
+		if m >= 0 {
+			tmpOne = int(a[m])
+			m = m - 1
+		} else {
+			tmpOne = 0
+		}
+		if n >= 0 {
+			tmpTwo = int(b[n])
+			n = n - 1
+		} else {
+			tmpTwo = 0
+		}
+		sum := tmpOne + tmpTwo + carry
+		res = strconv.Itoa(sum%2) + res
+		carry = sum / 2
+	}
+	return res
 }
 
 func addBinary(a string, b string) string {

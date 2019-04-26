@@ -34,5 +34,13 @@ func max(a, b int) int {
 }
 
 func robTwo(nums []int) int {
-
+	dp1 := make([]int, len(nums))
+	dp2 := make([]int, len(nums))
+	dp1[1] = nums[0]
+	dp2[1] = nums[0]
+	for i := 1; i < len(nums)-1; i++ {
+		dp1[i+1] = max(dp1[i], dp1[i-1]+nums[i])
+		dp2[i+1] = max(dp2[i], dp2[i-1]+nums[i+1])
+	}
+	return max(dp1[n-1], dp2[n-1])
 }

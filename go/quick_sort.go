@@ -23,7 +23,6 @@ func findPivot(arr []int) int {
 func random_partition(aris []int, begin int, end int) int {
 	// 随机化哨兵.
 	random := rand.Intn(end-begin) + begin
-	fmt.Println(random, end)
 	aris[end], aris[random] = aris[random], aris[end]
 	pvalue := aris[end]
 	i := begin - 1
